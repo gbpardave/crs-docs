@@ -6,20 +6,19 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'My Docs',
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
+			title: 'CRS Docs',
+			description:
+				'Documentación del ecosistema CRS (Courier & Logistics Management)',
 			sidebar: [
 				{
-					label: 'Guides',
+					label: 'crs-backend',
 					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', slug: 'guides/example' },
+						{ label: 'Autenticación y autorización', slug: 'backend/auth' },
 					],
 				},
-				{
-					label: 'Reference',
-					items: [{ autogenerate: { directory: 'reference' } }],
-				},
+				// Próximas secciones del ecosistema:
+				// { label: 'crs-delivery', autogenerate: { directory: 'delivery' } },
+				// { label: 'crs-go', autogenerate: { directory: 'go' } },
 			],
 		}),
 	],

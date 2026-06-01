@@ -1,40 +1,32 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
-template: splash # Remove or comment out this line to display the site sidebar on this page.
+title: CRS Docs
+description: Portal de documentación del ecosistema CRS (Courier & Logistics Management).
+template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
-  image:
-    file: ../../assets/houston.webp
+  tagline: Documentación técnica del ecosistema CRS — backends, panel y app de entregas.
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: Auth de crs-backend
+      link: /backend/auth/
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
-      icon: external
-      variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Next steps
+## Proyectos
 
-<CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
+<CardGrid>
+	<Card title="crs-backend" icon="seti:typescript">
+		Backend principal (NestJS + TypeORM). Identidad, casilleros, paquetes,
+		integraciones. Empieza por [Autenticación y autorización](/backend/auth/).
 	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
+	<Card title="crs-delivery" icon="rocket">
+		Backend de entregas last-mile (NestJS + Prisma). _Documentación en camino._
 	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
+	<Card title="crs-go" icon="puzzle">
+		Servicio en Go. _Documentación en camino._
 	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
+	<Card title="Panel & App" icon="laptop">
+		Panel de administración (crs-admin) y app móvil de motorizados.
+		_Documentación en camino._
 	</Card>
 </CardGrid>
