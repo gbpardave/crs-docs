@@ -43,7 +43,8 @@ export default defineConfig({
 				{
 					label: 'crs-backend',
 					items: [
-						{ label: 'Autenticación y autorización', slug: 'backend/auth' },
+						{ label: 'Autenticación', slug: 'backend/authentication' },
+						{ label: 'Autorización', slug: 'backend/authorization' },
 					],
 				},
 				{
