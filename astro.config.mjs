@@ -18,7 +18,27 @@ export default defineConfig({
 		// API de Astro 6+ (la antigua `markdown.rehypePlugins` se elimina en Astro 8).
 		processor: unified({
 			rehypePlugins: [
-				[rehypeMermaid, { strategy: 'inline', darkScheme: 'class', cache }],
+				[
+					rehypeMermaid,
+					{
+						strategy: 'inline',
+						darkScheme: 'class',
+						cache,
+						// Tema de marca: nodos/actores en coral con texto blanco. Estos
+						// colores se leen bien sobre fondo claro y oscuro, así que la
+						// variante clara (theme 'default') y la oscura (el plugin fuerza
+						// theme 'dark') quedan coherentes con la marca CRS.
+						mermaidConfig: {
+							theme: 'base',
+							themeVariables: {
+								primaryColor: '#e04c5c',
+								primaryTextColor: '#ffffff',
+								primaryBorderColor: '#c23443',
+								lineColor: '#e04c5c',
+							},
+						},
+					},
+				],
 			],
 		}),
 	},
@@ -27,6 +47,14 @@ export default defineConfig({
 			title: 'CRS Docs',
 			description:
 				'Documentación del ecosistema CRS (Courier & Logistics Management)',
+			// Logo de marca en lugar del texto del título. `replacesTitle` oculta el
+			// texto "CRS Docs" (que sigue usándose como alt y para SEO/pestaña).
+			// light = tema claro (logo con texto navy); dark = tema oscuro (texto blanco).
+			logo: {
+				light: './src/assets/crs-logo-light.png',
+				dark: './src/assets/crs-logo-dark.png',
+				replacesTitle: true,
+			},
 			// Tema de marca CRS (debe ir primero) + conmutador de diagramas Mermaid.
 			customCss: ['./src/styles/theme.css', './src/styles/mermaid.css'],
 			sidebar: [
