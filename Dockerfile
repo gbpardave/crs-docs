@@ -10,7 +10,13 @@ RUN npm install -g pnpm
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 
+# Chromium para renderizar los diagramas Mermaid a SVG durante el build.
+# --with-deps instala también las librerías de sistema que Chromium necesita.
+# Solo vive en esta etapa de build: la imagen final (nginx) NO lo incluye.
+RUN pnpm exec playwright install --with-deps chromium
+
 # Copia el resto y genera el build estático en /app/dist
+# (Mermaid se renderiza aquí; el HTML resultante ya lleva los SVG embebidos)
 COPY . .
 RUN pnpm build
 

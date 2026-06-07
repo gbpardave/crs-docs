@@ -13,6 +13,21 @@ NestJS 11 · TypeORM · Passport (`passport-jwt`) · JWT **ES256** (ECDSA P-256,
 
 La autenticación se basa en **JWT firmados con ES256** (criptografía asimétrica de curva elíptica). El backend firma los tokens con su llave privada (`JWT_PRIVATE_KEY`) y cualquiera puede verificarlos con la llave pública (`JWT_PUBLIC_KEY`). No hay secretos compartidos.
 
+Como las firmas son asimétricas, otros servicios del ecosistema (p. ej. `crs-delivery`) verifican los tokens emitidos por `crs-backend` sin necesidad de llamarlo: les basta la llave pública.
+
+```mermaid
+sequenceDiagram
+    participant C as Cliente
+    participant B as crs-backend
+    participant D as crs-delivery
+    C->>B: POST /auth/login (credenciales)
+    B->>B: Firma JWT con JWT_PRIVATE_KEY (ES256)
+    B-->>C: access token + refresh token
+    C->>D: Petición con Authorization: Bearer <token>
+    D->>D: Verifica firma con JWT_PUBLIC_KEY
+    D-->>C: Respuesta (sin llamar a crs-backend)
+```
+
 Sobre la autenticación se monta una capa de **autorización por roles**, donde un mismo usuario puede ser **cliente** o **empleado**, y su rol efectivo se deriva del tipo correspondiente.
 
 ## Modelo de identidad
