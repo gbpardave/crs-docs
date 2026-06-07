@@ -1,0 +1,46 @@
+/*
+ * Tema de marca CRS para Starlight.
+ * Paleta derivada de crs-go/src/lib/colors.ts (acento coral + base navy).
+ *
+ * Starlight aplica el tema OSCURO en :root y el CLARO en :root[data-theme='light'].
+ * En modo oscuro la rampa de grises va de claro (gray-1) a oscuro (gray-6);
+ * en modo claro se invierte. `--sl-color-white` = color de mayor contraste
+ * (títulos), `--sl-color-black` = fondo de página.
+ */
+
+/* ===== Modo oscuro (tema por defecto) ===== */
+:root {
+	/* Acento coral */
+	--sl-color-accent-low: #4a1820;
+	--sl-color-accent: #e04c5c;
+	--sl-color-accent-high: #ff6b7a; /* enlaces: coral brillante (crs-go dark accent) */
+
+	/* Base navy (fondos, texto, bordes) */
+	--sl-color-white: #f0f0f5; /* títulos / texto más brillante (foreground) */
+	--sl-color-gray-1: #e3e3ef;
+	--sl-color-gray-2: #b8b8cc; /* texto del cuerpo */
+	--sl-color-gray-3: #9a99b0; /* texto atenuado (mutedForeground) */
+	--sl-color-gray-4: #4a4a6a;
+	--sl-color-gray-5: #2a2950; /* bordes */
+	--sl-color-gray-6: #161630; /* superficies: sidebar, fondos de código (surface) */
+	--sl-color-black: #0c0c1a; /* fondo de página (background) */
+}
+
+/* ===== Modo claro ===== */
+:root[data-theme='light'] {
+	/* Acento coral */
+	--sl-color-accent-low: #ffe0e3;
+	--sl-color-accent: #e04c5c;
+	--sl-color-accent-high: #b01f2d; /* enlaces: coral oscuro para contraste sobre claro */
+
+	/* Base navy claro */
+	--sl-color-white: #1f1d49; /* títulos (foreground navy) */
+	--sl-color-gray-1: #2a2850;
+	--sl-color-gray-2: #45436a; /* texto del cuerpo */
+	--sl-color-gray-3: #6e6d8a; /* texto atenuado (mutedForeground) */
+	--sl-color-gray-4: #9a99b0;
+	--sl-color-gray-5: #e0e1e8; /* bordes (border) */
+	--sl-color-gray-6: #f0f1f5; /* superficies (surface) */
+	--sl-color-gray-7: #f7f7fa;
+	--sl-color-black: #fcfcfd; /* fondo de página (background) */
+}

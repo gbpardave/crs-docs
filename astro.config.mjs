@@ -27,8 +27,8 @@ export default defineConfig({
 			title: 'CRS Docs',
 			description:
 				'Documentación del ecosistema CRS (Courier & Logistics Management)',
-			// Conmuta las variantes clara/oscura de los diagramas Mermaid.
-			customCss: ['./src/styles/mermaid.css'],
+			// Tema de marca CRS (debe ir primero) + conmutador de diagramas Mermaid.
+			customCss: ['./src/styles/theme.css', './src/styles/mermaid.css'],
 			sidebar: [
 				{
 					label: 'crs-backend',
