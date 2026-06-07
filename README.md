@@ -1,49 +1,60 @@
-# Starlight Starter Kit: Basics
+# CRS Docs
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+Documentación técnica del ecosistema **CRS** (Courier & Logistics Management), construida con
+[Astro](https://astro.build) + [Starlight](https://starlight.astro.build).
 
-```
-bun create astro@latest -- --template starlight
-```
+Cubre los backends y aplicaciones del ecosistema: `crs-backend`, `crs-delivery`, `crs-go` y el
+panel/app de motorizados.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Requisitos
 
-## 🚀 Project Structure
+- [Bun](https://bun.sh) 1.3+ (gestor de paquetes y runner del build).
 
-Inside of your Astro + Starlight project, you'll see the following folders and files:
+## Desarrollo
 
-```
-.
-├── public/
-├── src/
-│   ├── assets/
-│   ├── content/
-│   │   └── docs/
-│   └── content.config.ts
-├── astro.config.mjs
-├── package.json
-└── tsconfig.json
+```sh
+bun install     # instala dependencias
+bun run dev     # servidor local en http://localhost:4321
 ```
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
+| Comando | Acción |
+| :-- | :-- |
+| `bun install` | Instala dependencias |
+| `bun run dev` | Servidor de desarrollo en `localhost:4321` |
+| `bun run build` | Build estático de producción en `./dist/` |
+| `bun run preview` | Previsualiza el build localmente |
 
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
+## Estructura
 
-Static assets, like favicons, can be placed in the `public/` directory.
+```
+src/
+├── assets/                 # logos de marca (claro/oscuro)
+├── content/docs/           # las páginas de documentación (.md / .mdx)
+│   ├── index.mdx           # portada
+│   └── backend/            # docs de crs-backend (autenticación, autorización, ...)
+├── styles/                 # tema de marca (theme.css) y diagramas (mermaid.css)
+└── content.config.ts       # colección de contenido de Starlight
+astro.config.mjs            # configuración: site, sidebar, logo, Mermaid
+```
 
-## 🧞 Commands
+## Diagramas (Mermaid)
 
-All commands are run from the root of the project, from a terminal:
+Los diagramas se escriben como bloques ` ```mermaid ` dentro del Markdown y se renderizan a
+**SVG en el build** (vía `@beoe/rehype-mermaid` + Chromium), sin enviar JavaScript al navegador.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun run dev`             | Starts local dev server at `localhost:4321`      |
-| `bun run build`           | Build your production site to `./dist/`          |
-| `bun run preview`         | Preview your build locally, before deploying     |
-| `bun run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun run astro -- --help` | Get help using the Astro CLI                     |
+> ⚠️ **Evita `erDiagram`**: rompe el build con este plugin (falla al convertir su SVG a inline
+> y deja la página vacía). Usa `flowchart`, `sequenceDiagram`, etc.
 
-## 👀 Want to learn more?
+## Despliegue
 
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+El sitio es **estático** y se sirve con **nginx**. El `Dockerfile` (multi-stage) construye con
+Bun y renderiza los diagramas con Chromium en la etapa de build; la imagen final solo contiene
+nginx + los archivos estáticos.
+
+- **Plataforma:** Dokploy → Build Type `Dockerfile`, puerto del contenedor `80`.
+- **Dominio:** `docs.crs-logistics.com` (HTTPS con Let's Encrypt).
+
+```sh
+docker build -t crs-docs .
+docker run -p 8080:80 crs-docs   # http://localhost:8080
+```

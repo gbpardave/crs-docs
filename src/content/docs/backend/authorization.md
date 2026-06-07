@@ -14,32 +14,10 @@ NestJS guards + `Reflector` (metadata) · Passport JWT · enum `ValidRoles`.
 La entidad central es `User`. Cada usuario tiene un `Role` básico y es **cliente o empleado** (no ambos):
 
 ```mermaid
-erDiagram
-    USER ||--o{ ROLE : "role_id"
-    USER |o--|| CLIENT : "client_id"
-    USER |o--o| EMPLOYEE : "employee_id"
-    CLIENT }o--|| CLIENT_TYPE : "client_type_id"
-    EMPLOYEE }o--|| EMPLOYEE_TYPE : "employee_type_id"
-
-    USER {
-        int id PK
-        string email
-        int role_id FK
-        int client_id FK
-        int employee_id FK
-    }
-    ROLE {
-        int id PK
-        string code "CLIENT | EMPLOYEE"
-    }
-    CLIENT_TYPE {
-        int id PK
-        string code "NORMAL, MARKETPLACE, RESELLER"
-    }
-    EMPLOYEE_TYPE {
-        int id PK
-        string code "ADMIN, SALES, OPS_USA, ..."
-    }
+flowchart LR
+    U[User] -->|role_id| R[Role · CLIENT / EMPLOYEE]
+    U -->|client_id| C[Client] --> CT[ClientType · NORMAL, MARKETPLACE, RESELLER]
+    U -->|employee_id| E[Employee] --> ET[EmployeeType · ADMIN, SALES, OPS_USA, ...]
 ```
 
 Hay **dos niveles**:
