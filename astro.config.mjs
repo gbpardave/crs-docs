@@ -18,27 +18,9 @@ export default defineConfig({
 		// API de Astro 6+ (la antigua `markdown.rehypePlugins` se elimina en Astro 8).
 		processor: unified({
 			rehypePlugins: [
-				[
-					rehypeMermaid,
-					{
-						strategy: 'inline',
-						darkScheme: 'class',
-						cache,
-						// Tema de marca: nodos/actores en coral con texto blanco. Estos
-						// colores se leen bien sobre fondo claro y oscuro, así que la
-						// variante clara (theme 'default') y la oscura (el plugin fuerza
-						// theme 'dark') quedan coherentes con la marca CRS.
-						mermaidConfig: {
-							theme: 'base',
-							themeVariables: {
-								primaryColor: '#e04c5c',
-								primaryTextColor: '#ffffff',
-								primaryBorderColor: '#c23443',
-								lineColor: '#e04c5c',
-							},
-						},
-					},
-				],
+				// Diagramas con el tema por defecto de Mermaid (se adapta a claro/oscuro
+				// vía darkScheme 'class'). strategy 'inline' = 0 JS al navegador.
+				[rehypeMermaid, { strategy: 'inline', darkScheme: 'class', cache }],
 			],
 		}),
 	},
