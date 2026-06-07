@@ -1,0 +1,21 @@
+/*
+ * Diagramas Mermaid (@beoe/rehype-mermaid con darkScheme: 'class').
+ * El plugin genera DOS variantes por diagrama (.beoe-light y .beoe-dark) y deja
+ * que el sitio decida cuál mostrar. Starlight marca el tema activo con el atributo
+ * <html data-theme="light|dark">, así que aquí ocultamos la variante que no toca.
+ *
+ * Por defecto (y sin JS) se muestra la versión clara.
+ */
+.beoe .beoe-dark {
+	display: none;
+}
+.beoe .beoe-light {
+	display: revert;
+}
+
+:root[data-theme='dark'] .beoe .beoe-light {
+	display: none;
+}
+:root[data-theme='dark'] .beoe .beoe-dark {
+	display: revert;
+}

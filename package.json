@@ -10,10 +10,15 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/markdown-remark": "^7.2.0",
     "@astrojs/starlight": "^0.39.2",
     "@beoe/rehype-mermaid": "^0.4.2",
     "astro": "^6.3.1",
     "playwright": "^1.60.0",
     "sharp": "^0.34.5"
-  }
+  },
+  "trustedDependencies": [
+    "esbuild",
+    "sharp"
+  ]
 }

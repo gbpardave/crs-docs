@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import { unified } from '@astrojs/markdown-remark';
 import rehypeMermaid from '@beoe/rehype-mermaid';
 
 // Caché en memoria: deduplica diagramas idénticos dentro de un mismo build.
@@ -14,15 +15,20 @@ export default defineConfig({
 	markdown: {
 		// Convierte los bloques ```mermaid en SVG embebido (strategy 'inline':
 		// 0 JS al navegador). darkScheme 'class' se integra con el tema de Starlight.
-		rehypePlugins: [
-			[rehypeMermaid, { strategy: 'inline', darkScheme: 'class', cache }],
-		],
+		// API de Astro 6+ (la antigua `markdown.rehypePlugins` se elimina en Astro 8).
+		processor: unified({
+			rehypePlugins: [
+				[rehypeMermaid, { strategy: 'inline', darkScheme: 'class', cache }],
+			],
+		}),
 	},
 	integrations: [
 		starlight({
 			title: 'CRS Docs',
 			description:
 				'Documentación del ecosistema CRS (Courier & Logistics Management)',
+			// Conmuta las variantes clara/oscura de los diagramas Mermaid.
+			customCss: ['./src/styles/mermaid.css'],
 			sidebar: [
 				{
 					label: 'crs-backend',
