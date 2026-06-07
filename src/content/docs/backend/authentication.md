@@ -3,6 +3,14 @@ title: Autenticación
 description: Cómo crs-backend autentica usuarios — JWT ES256, par de tokens access/refresh con rotación, login, registro, Google OAuth y recuperación de contraseña.
 ---
 
+:::tip[TL;DR]
+- **JWT ES256** asimétrico: privada firma, pública verifica (sin secretos compartidos).
+- Login → **access (15 min)** + **refresh (60 días)**.
+- En cada request: `Authorization: Bearer <access>`.
+- El refresh **se rota** en cada uso; reusar el anterior → `401`.
+- Login exige **email verificado** (`state = 1`).
+:::
+
 El módulo `auth` de **crs-backend** centraliza la identidad del sistema: registro y login de usuarios, emisión de tokens, login con Google y recuperación de contraseña. Esta página cubre **cómo se autentica** un usuario. Para qué puede hacer cada uno una vez autenticado, ver [Autorización](/backend/authorization/).
 
 :::note[Stack]

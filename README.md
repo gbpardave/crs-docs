@@ -37,6 +37,31 @@ src/
 astro.config.mjs            # configuración: site, sidebar, logo, Mermaid
 ```
 
+## Convención de documentación
+
+Toda página sigue la misma plantilla **balanceada** (respuesta rápida arriba, profundidad debajo).
+Esto sirve tanto al que solo necesita recordar algo como al que está aprendiendo (onboarding):
+
+```
+1. :::tip[TL;DR]   →  3-5 bullets con lo esencial
+2. Contexto         →  1-2 frases: qué es y para qué
+3. Conceptos        →  explícito, con el "por qué" (diagramas aquí)
+4. Referencia       →  tablas tersas (endpoints, roles, config)
+5. Guía (opcional)  →  pasos de la tarea más común
+```
+
+Guía rápida del nivel de detalle según el tipo de contenido:
+
+| Tipo | Estilo |
+| :-- | :-- |
+| **Referencia** (endpoints, tablas, config) | Terso, en tablas |
+| **Concepto** (cómo/por qué funciona algo) | Explícito, captura las decisiones no obvias |
+| **Guía** (cómo hacer X) | Paso a paso |
+
+> **Captura el "por qué".** Es documentación interna: las decisiones no obvias (p. ej. *por qué
+> el refresh se rota*) valen más que la repetición del código. Las páginas de
+> `backend/` (autenticación y autorización) son el ejemplo a copiar.
+
 ## Diagramas (Mermaid)
 
 Los diagramas se escriben como bloques ` ```mermaid ` dentro del Markdown y se renderizan a

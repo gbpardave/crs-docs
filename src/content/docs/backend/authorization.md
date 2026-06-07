@@ -3,6 +3,14 @@ title: Autorización
 description: Modelo de identidad y control de acceso por roles en crs-backend — User/Employee/Client, el enum ValidRoles, el decorador @Auth() y el UserRoleGuard.
 ---
 
+:::tip[TL;DR]
+- Un usuario es **cliente XOR empleado**.
+- Rol efectivo = `employeeType.code ?? clientType.code` (viaja en el claim `role` del JWT).
+- Protege endpoints con **`@Auth(...roles)`** (valida JWT + rol).
+- `@Auth()` sin args = cualquier usuario autenticado.
+- Los códigos de `ValidRoles` deben **coincidir exactos** con la BD (match por string).
+:::
+
 Una vez que un usuario está [autenticado](/backend/authentication/), la **autorización** decide qué puede hacer. crs-backend usa control de acceso por **roles**, donde el rol efectivo se deriva de si el usuario es **empleado** o **cliente**.
 
 :::note[Stack]
