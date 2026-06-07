@@ -1,3 +1,7 @@
 allowBuilds:
   esbuild: true
   sharp: true
+  # Caché de diagramas Mermaid (SQLite). Usa binario precompilado (prebuild-install),
+  # no compila desde cero. Playwright queda fuera a propósito: no debe descargar
+  # Chromium en el build (ni local ni Docker) — la caché evita lanzar el navegador.
+  better-sqlite3: true
