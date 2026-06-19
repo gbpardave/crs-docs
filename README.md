@@ -13,9 +13,16 @@ panel/app de motorizados.
 ## Desarrollo
 
 ```sh
-bun install     # instala dependencias
-bun run dev     # servidor local en http://localhost:4321
+bun install                     # instala dependencias
+bunx playwright install chromium # Chromium para renderizar los diagramas Mermaid (1 sola vez)
+bun run dev                     # servidor local en http://localhost:4321
 ```
+
+> ⚠️ **El paso de Chromium es obligatorio en local.** Los diagramas Mermaid se renderizan a SVG
+> en el build con un Chromium headless (Playwright). Si falta, el build **revienta** al encontrar
+> el primer ` ```mermaid ` y ninguna página se genera. En Arch/otros, Playwright avisa con
+> `BEWARE: your OS is not officially supported` y descarga un build de Ubuntu como fallback: es
+> normal, no es un error. En Docker no hace falta (lo instala el `Dockerfile`).
 
 | Comando | Acción |
 | :-- | :-- |
@@ -66,6 +73,7 @@ Guía rápida del nivel de detalle según el tipo de contenido:
 
 Los diagramas se escriben como bloques ` ```mermaid ` dentro del Markdown y se renderizan a
 **SVG en el build** (vía `@beoe/rehype-mermaid` + Chromium), sin enviar JavaScript al navegador.
+Requiere el Chromium de Playwright en local (ver [Desarrollo](#desarrollo)).
 
 > ⚠️ **Evita `erDiagram`**: rompe el build con este plugin (falla al convertir su SVG a inline
 > y deja la página vacía). Usa `flowchart`, `sequenceDiagram`, etc.
