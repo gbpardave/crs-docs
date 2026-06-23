@@ -3,30 +3,42 @@ title: CRS Docs
 description: Portal de documentación del ecosistema CRS (Courier & Logistics Management).
 template: splash
 hero:
-  tagline: Documentación técnica del ecosistema CRS — backends, panel y app de entregas.
+  tagline: Documentación técnica del ecosistema CRS — 2 backends, 3 web y 1 app móvil.
   actions:
-    - text: Auth de crs-backend
-      link: /backend/authentication/
+    - text: Empezar aquí
+      link: /empezar/
       icon: right-arrow
+    - text: Auth de crs-core
+      link: /core/authentication/
+      icon: document
+      variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
+¿Primer día? Empieza por **[la guía del ecosistema](/empezar/)** — el mapa de todos los
+proyectos y cómo se conectan.
+
 ## Proyectos
 
 <CardGrid>
-	<Card title="crs-backend" icon="seti:typescript">
-		Backend principal (NestJS + TypeORM). Identidad, casilleros, paquetes,
-		integraciones. Empieza por [Autenticación y autorización](/backend/authentication/).
+	<Card title="crs-core" icon="seti:typescript">
+		Backend núcleo (NestJS + TypeORM + MySQL): identidad, casilleros, paquetes,
+		finanzas. Empieza por [Autenticación y autorización](/core/authentication/).
 	</Card>
-	<Card title="crs-delivery" icon="rocket">
-		Backend de entregas last-mile (NestJS + Prisma). _Documentación en camino._
+	<Card title="crs-lastmile" icon="rocket">
+		Backend de última milla (NestJS + Prisma + BullMQ). _Documentación en camino._
 	</Card>
-	<Card title="crs-go" icon="puzzle">
-		Servicio en Go. _Documentación en camino._
+	<Card title="crs-backoffice" icon="laptop">
+		Consola web interna del staff (React). _Documentación en camino._
 	</Card>
-	<Card title="Panel & App" icon="laptop">
-		Panel de administración (crs-admin) y app móvil de motorizados.
-		_Documentación en camino._
+	<Card title="crs-portal" icon="open-book">
+		Portal web del cliente final (SvelteKit). _Documentación en camino._
+	</Card>
+	<Card title="crs-business" icon="setting">
+		App web operativa de CompraFácil (Svelte). _Documentación en camino._
+	</Card>
+	<Card title="crs-field — 'CRS Go'" icon="phone">
+		App móvil de terreno: couriers + staff (Expo/RN). _Documentación en camino._
 	</Card>
 </CardGrid>

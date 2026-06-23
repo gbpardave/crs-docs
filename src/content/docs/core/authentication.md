@@ -1,6 +1,6 @@
 ---
 title: Autenticación
-description: Cómo crs-backend autentica usuarios — JWT ES256, par de tokens access/refresh con rotación, login, registro, Google OAuth y recuperación de contraseña.
+description: Cómo crs-core autentica usuarios — JWT ES256, par de tokens access/refresh con rotación, login, registro, Google OAuth y recuperación de contraseña.
 ---
 
 :::tip[TL;DR]
@@ -11,7 +11,7 @@ description: Cómo crs-backend autentica usuarios — JWT ES256, par de tokens a
 - Login exige **email verificado** (`state = 1`).
 :::
 
-El módulo `auth` de **crs-backend** centraliza la identidad del sistema: registro y login de usuarios, emisión de tokens, login con Google y recuperación de contraseña. Esta página cubre **cómo se autentica** un usuario. Para qué puede hacer cada uno una vez autenticado, ver [Autorización](/backend/authorization/).
+El módulo `auth` de **crs-core** centraliza la identidad del sistema: registro y login de usuarios, emisión de tokens, login con Google y recuperación de contraseña. Esta página cubre **cómo se autentica** un usuario. Para qué puede hacer cada uno una vez autenticado, ver [Autorización](/core/authorization/).
 
 :::note[Stack]
 NestJS 11 · TypeORM · Passport (`passport-jwt`) · JWT **ES256** (ECDSA P-256, asimétrico) · bcrypt.
@@ -19,7 +19,7 @@ NestJS 11 · TypeORM · Passport (`passport-jwt`) · JWT **ES256** (ECDSA P-256,
 
 ## JWT con firma asimétrica (ES256)
 
-Los tokens se firman con **ES256** (curva elíptica P-256). crs-backend firma con su **llave privada** (`JWT_PRIVATE_KEY`) y verifica con su **llave pública** (`JWT_PUBLIC_KEY`). No hay secretos compartidos.
+Los tokens se firman con **ES256** (curva elíptica P-256). crs-core firma con su **llave privada** (`JWT_PRIVATE_KEY`) y verifica con su **llave pública** (`JWT_PUBLIC_KEY`). No hay secretos compartidos.
 
 ```ts title="src/auth/config/jwt.config.ts"
 export interface JwtConfig {
@@ -66,7 +66,7 @@ El refresh token **no se guarda en claro**. Al emitirlo, se guarda su `sha256` e
 ```mermaid
 sequenceDiagram
     actor U as Usuario
-    participant API as crs-backend
+    participant API as crs-core
     participant DB as Base de datos
     U->>API: POST /auth/login (email, password)
     API->>DB: busca usuario, exige state = 1 (email verificado)
@@ -144,4 +144,4 @@ El `User` resultante queda disponible en `request.user` y se obtiene en los cont
 | `GET`  | `/auth/me` | `@Auth()` | Perfil del usuario autenticado. |
 | `PATCH` | `/auth/me/complete-profile` | `@Auth()` | Completa el perfil (principalmente usuarios de Google). |
 
-> El control de **quién** puede acceder a cada endpoint protegido se hace con el decorador `@Auth(...roles)`. Eso se explica en [Autorización](/backend/authorization/).
+> El control de **quién** puede acceder a cada endpoint protegido se hace con el decorador `@Auth(...roles)`. Eso se explica en [Autorización](/core/authorization/).

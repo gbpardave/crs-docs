@@ -40,24 +40,32 @@ export default defineConfig({
 			// Tema de marca CRS (debe ir primero) + conmutador de diagramas Mermaid.
 			customCss: ['./src/styles/theme.css', './src/styles/mermaid.css'],
 			sidebar: [
+				{ label: 'Empezar aquí', slug: 'empezar' },
 				{
-					label: 'crs-backend',
+					label: 'Backends',
 					items: [
-						{ label: 'Autenticación', slug: 'backend/authentication' },
-						{ label: 'Autorización', slug: 'backend/authorization' },
+						{
+							label: 'crs-core',
+							items: [
+								{ label: 'Visión general', slug: 'core' },
+								{ label: 'Autenticación', slug: 'core/authentication' },
+								{ label: 'Autorización', slug: 'core/authorization' },
+							],
+						},
+						{ label: 'crs-lastmile', slug: 'lastmile' },
 					],
 				},
 				{
-					label: 'crs-delivery',
-					items: [{ label: 'Visión general', slug: 'delivery' }],
+					label: 'Frontends web',
+					items: [
+						{ label: 'crs-backoffice', slug: 'backoffice' },
+						{ label: 'crs-portal', slug: 'portal' },
+						{ label: 'crs-business', slug: 'business' },
+					],
 				},
 				{
-					label: 'crs-go',
-					items: [{ label: 'Visión general', slug: 'go' }],
-				},
-				{
-					label: 'Panel & App',
-					items: [{ label: 'Visión general', slug: 'panel' }],
+					label: 'Móvil',
+					items: [{ label: 'crs-field (CRS Go)', slug: 'field' }],
 				},
 			],
 		}),
