@@ -18,6 +18,16 @@ const openAPIPlugin = starlightOpenAPI([
 		base: 'core/api',
 		label: 'Referencia API',
 		schema: './src/openapi/crs-core.json',
+		// Ejemplos de código por endpoint: solo Node (axios) y Go. Node por defecto.
+		snippets: {
+			operation: {
+				clients: {
+					javascript: ['axios'],
+					go: ['nethttp'],
+				},
+				default: { target: 'javascript', client: 'axios' },
+			},
+		},
 	},
 ]);
 
