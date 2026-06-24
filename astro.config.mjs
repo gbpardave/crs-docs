@@ -3,10 +3,23 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import { unified } from '@astrojs/markdown-remark';
 import rehypeMermaid from '@beoe/rehype-mermaid';
+import starlightOpenAPI, { openAPISidebarGroups } from 'starlight-openapi';
 
 // Caché en memoria: deduplica diagramas idénticos dentro de un mismo build.
 // El render real lo hace Chromium en la etapa de build del Docker (ver Dockerfile).
 const cache = new Map();
+
+// Referencia de API de crs-core, generada desde su OpenAPI (NestJS
+// @nestjs/swagger). Un único spec: starlight-openapi lo sub-agrupa por tag
+// (Autenticación, AWBs, Lockers…) dentro de una sola sección "Referencia API".
+// Regenerar con `pnpm openapi:gen` en crs-core y copiar openapi.json aquí.
+const openAPIPlugin = starlightOpenAPI([
+	{
+		base: 'core/api',
+		label: 'Referencia API',
+		schema: './src/openapi/crs-core.json',
+	},
+]);
 
 // https://astro.build/config
 export default defineConfig({
@@ -39,6 +52,7 @@ export default defineConfig({
 			},
 			// Tema de marca CRS (debe ir primero) + conmutador de diagramas Mermaid.
 			customCss: ['./src/styles/theme.css', './src/styles/mermaid.css'],
+			plugins: [openAPIPlugin],
 			sidebar: [
 				{ label: 'Empezar aquí', slug: 'empezar' },
 				{
@@ -50,6 +64,9 @@ export default defineConfig({
 								{ label: 'Visión general', slug: 'core' },
 								{ label: 'Autenticación', slug: 'core/authentication' },
 								{ label: 'Autorización', slug: 'core/authorization' },
+								// Grupos de endpoints generados (uno por área registrada arriba).
+								// starlight-openapi los inserta en este único punto.
+								...openAPISidebarGroups,
 							],
 						},
 						{ label: 'crs-lastmile', slug: 'lastmile' },

@@ -15,7 +15,8 @@
     "@beoe/rehype-mermaid": "^0.4.2",
     "astro": "^6.3.1",
     "playwright": "^1.60.0",
-    "sharp": "^0.34.5"
+    "sharp": "^0.34.5",
+    "starlight-openapi": "^0.25.3"
   },
   "trustedDependencies": [
     "esbuild",
