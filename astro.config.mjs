@@ -53,37 +53,25 @@ export default defineConfig({
 			// Tema de marca CRS (debe ir primero) + conmutador de diagramas Mermaid.
 			customCss: ['./src/styles/theme.css', './src/styles/mermaid.css'],
 			plugins: [openAPIPlugin],
+			// Lista plana de proyectos (sin agrupar por backend/frontend/móvil).
 			sidebar: [
 				{ label: 'Empezar aquí', slug: 'empezar' },
 				{
-					label: 'Backends',
+					label: 'crs-core',
 					items: [
-						{
-							label: 'crs-core',
-							items: [
-								{ label: 'Visión general', slug: 'core' },
-								{ label: 'Autenticación', slug: 'core/authentication' },
-								{ label: 'Autorización', slug: 'core/authorization' },
-								// Grupos de endpoints generados (uno por área registrada arriba).
-								// starlight-openapi los inserta en este único punto.
-								...openAPISidebarGroups,
-							],
-						},
-						{ label: 'crs-lastmile', slug: 'lastmile' },
+						{ label: 'Visión general', slug: 'core' },
+						{ label: 'Autenticación', slug: 'core/authentication' },
+						{ label: 'Autorización', slug: 'core/authorization' },
+						// Grupos de endpoints generados (uno por área registrada arriba).
+						// starlight-openapi los inserta en este único punto.
+						...openAPISidebarGroups,
 					],
 				},
-				{
-					label: 'Frontends web',
-					items: [
-						{ label: 'crs-backoffice', slug: 'backoffice' },
-						{ label: 'crs-portal', slug: 'portal' },
-						{ label: 'crs-business', slug: 'business' },
-					],
-				},
-				{
-					label: 'Móvil',
-					items: [{ label: 'crs-field (CRS Go)', slug: 'field' }],
-				},
+				{ label: 'crs-lastmile', slug: 'lastmile' },
+				{ label: 'crs-backoffice', slug: 'backoffice' },
+				{ label: 'crs-portal', slug: 'portal' },
+				{ label: 'crs-business', slug: 'business' },
+				{ label: 'crs-field (CRS Go)', slug: 'field' },
 			],
 		}),
 	],
