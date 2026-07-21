@@ -80,6 +80,16 @@ export default defineConfig({
 				},
 				{ label: 'crs-lastmile', slug: 'lastmile' },
 				{ label: 'crs-backoffice', slug: 'backoffice' },
+				{
+					label: 'crs-bff-backoffice',
+					items: [
+						{ label: 'Visión general', slug: 'bff-backoffice' },
+						{
+							label: 'Flujo de autenticación',
+							slug: 'bff-backoffice/auth-flow',
+						},
+					],
+				},
 				{ label: 'crs-portal', slug: 'portal' },
 				{ label: 'crs-business', slug: 'business' },
 				{ label: 'crs-field (CRS Go)', slug: 'field' },
